@@ -1,0 +1,109 @@
+Q1. List any five functions of the pandas library with execution.
+
+  1. read_csv()
+    This is one of the most crucial pandas methods in Python. read_csv() function helps read a comma-separated values (csv) file into a Pandas DataFrame. All you need to do is mention the path of the file you want it to read. It can also read files separated by delimiters other than comma, like | or tab.
+
+    Python Code:
+        data_frame = pd.read_csv("https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv")
+  2. head()
+     head(n) is used to return the first n rows of a dataset. By default, df.head() will return the first 5 rows of the DataFrame. If you want more/less number of rows, you can specify n as an integer.
+        data_frame.head()
+  3. describe()
+     describe() is used to generate descriptive statistics of the data in a Pandas DataFrame or Series. It summarizes central tendency and dispersion of the dataset. describe() helps in getting a quick overview of the dataset.
+        data_frame.describe()
+  4.  sort_values()
+      sort_values() is used to sort column in a Pandas DataFrame (or a Pandas Series) by values in ascending or descending order. By specifying the inplace attribute as True, you can make a change directly in the original DataFrame.
+        data_frame.sort_values(by='Name', inplace=True)
+  5. fillna()
+      Typically in a large dataset, you will find several entries labelled NaN by Python. NaN stands for “not a number”, and represents entries that were not populated in the original data source. While populating the values in the DataFrame, Pandas makes sure that these entries can be identified separately by the user.
+
+      fillna() helps to replace all NaN values in a DataFrame or Series by imputing these missing values with more appropriate values.
+        
+        data_frame.fillna("pakkir")
+        
+        
+Q2. Given a Pandas DataFrame df with columns 'A', 'B', and 'C', write a Python function to re-index the
+DataFrame with a new index that starts from 1 and increments by 2 for each row.
+
+    import pandas as pd
+    df = pd.DataFrame({'A' : ['Pakkir','Akshay','Abhi'], 'B': [25, 4 , 3], 'C': ['Grad', 'UKG', 'LKG']})
+    dfn = df.reindex(index=[1,3,5])
+
+Q3. You have a Pandas DataFrame df with a column named 'Values'. Write a Python function that
+iterates over the DataFrame and calculates the sum of the first three values in the 'Values' column. The
+function should print the sum to the console.
+For example, if the 'Values' column of df contains the values [10, 20, 30, 40, 50], your function should
+calculate and print the sum of the first three values, which is 60.
+
+    def add(l):
+      add = 0
+      for i in range(3):
+          add = add + l[i]
+      return add
+    import pandas as pd
+    df = pd.DataFrame({'values' : [10, 20, 30, 40, 50] })
+    df.apply(add)
+
+Q4. Given a Pandas DataFrame df with a column 'Text', write a Python function to create a new column
+'Word_Count' that contains the number of words in each row of the 'Text' column.
+
+    import pandas as pd
+    df = pd.DataFrame({'Text' : ['Pakkir','Akshay','Abhi'] })
+    df['Word_Count'] = df['Text'].apply(lambda x: len(x))
+
+
+Q5. How are DataFrame.size() and DataFrame.shape() different?
+
+
+    Pandas DataFrame size():
+      The size property is used to get an int representing the number of elements in this object and Return the number of rows if Series. Otherwise, return the number of rows times the number of columns if DataFrame.
+    Syntax: dataframe.size
+    Return : Returns size of dataframe/series which is equivalent to total number of elements. That is rows x columns.
+    
+    Pandas DataFrame shape()
+      The shape property is used to get a tuple representing the dimensionality of the Pandas DataFrame.
+    Syntax: dataframe.shape
+    Return : Returns tuple of shape (Rows, columns) of dataframe/series
+    
+Q6. Which function of pandas do we use to read an excel file?
+
+    Pandas read_excel() function is used for reading the excel files. Files can be imported using a URL link or can be directly imported from the disk. 
+    There are different parameters like io for path,sheet_name for specifying the name of the sheet, etc. for reading the file.
+
+
+Q7. You have a Pandas DataFrame df that contains a column named 'Email' that contains email
+addresses in the format 'username@domain.com'. Write a Python function that creates a new column
+'Username' in df that contains only the username part of each email address.
+The username is the part of the email address that appears before the '@' symbol. For example, if the
+email address is 'john.doe@example.com', the 'Username' column should contain 'john.doe'. Your
+function should extract the username from each email address and store it in the new 'Username'
+column.
+
+
+          import pandas as pd
+          df = pd.DataFrame({'Email' : ['pakkir@gmail.com','akshay@gmail.com','abhi@gmail.com','bhoomi@gmail.com','tharunika@gmail.com']})
+          def extract_username(df):
+              df['Username'] = df['Email'].apply(lambda x: x.split('@')[0])
+              return df
+
+          extract_username(df)
+
+
+Q8. You have a Pandas DataFrame df with columns 'A', 'B', and 'C'. Write a Python function that selects
+all rows where the value in column 'A' is greater than 5 and the value in column 'B' is less than 10. The
+function should return a new DataFrame that contains only the selected rows.
+For example, if df contains the following values:
+                                                    A B C
+                                                  0 3 5 1
+                                                  1 8 2 7
+                                                  2 6 9 4
+                                                  3 2 3 5
+                                                  4 9 1 2
+                                                  
+                  import pandas as pd
+                  df = pd.DataFrame({'A' : [3,8,6,2,9], 'B' : [5,2,9,3,1], 'C' : [1,7,4,5,2]})
+                  def select_rows(df):
+                      new_df = df[(df['A'] > 5) & (df['B'] < 10)]
+                      return new_df
+                  select_rows(df)                          
+                                                  
